@@ -5,7 +5,7 @@ import '../App.css';
 export class Main extends Component {
   render(props) {
     return (
-      <div className='container-filled'>
+      <div className='mint container-filled'>
         <div className="text-center my-1 text-dark">
           <h1>
             <strong>

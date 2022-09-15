@@ -1,29 +1,27 @@
 import React, { Component } from 'react'
-import Web3 from 'web3';
-import detectEthereumProvider from '@metamask/detect-provider';
-import KryptoBird from './abis/KryptoBird.json';
-import Navbar from './components/Navbar';
-import Main from './components/Main';
-
-
+import Web3 from 'web3'
+import detectEthereumProvider from '@metamask/detect-provider'
+import KryptoBird from './abis/KryptoBird.json'
+import Navbar from './components/Navbar'
+import Main from './components/Main'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './components/Home'
 
 class App extends Component {
-
   async componentDidMount() {
-    await this.loadWeb3();
-    await this.loadBlockchainData();
+    await this.loadWeb3()
+    await this.loadBlockchainData()
   }
 
   // function to detect ethereum provider
   async loadWeb3() {
-    const provider = await detectEthereumProvider();
+    const provider = await detectEthereumProvider()
 
-    if(provider){
-      console.log('ethereum wallet is connected');
-      window.web3 = new Web3(provider);
-    }
-    else{
-      console.log('No ethereum wallet detected');
+    if (provider) {
+      console.log('ethereum wallet is connected')
+      window.web3 = new Web3(provider)
+    } else {
+      console.log('No ethereum wallet detected')
     }
   }
 
@@ -31,61 +29,79 @@ class App extends Component {
     const web3 = window.web3
 
     // load accounts
-    const accounts = await web3.eth.getAccounts();
-    this.setState({account: accounts[0]})
+    const accounts = await web3.eth.getAccounts()
+    this.setState({ account: accounts[0] })
     // load Kryptobirdz contract
     const networkID = await web3.eth.net.getId()
     const networkData = await KryptoBird.networks[networkID]
 
-    if(networkData) {
-      const abi = KryptoBird.abi;
-      const address = networkData.address;
+    if (networkData) {
+      const abi = KryptoBird.abi
+      const address = networkData.address
       const contract = new web3.eth.Contract(abi, address)
-      this.setState({contract})
+      this.setState({ contract })
 
       // load totalSupply
       const totalSupply = await contract.methods.totalSupply().call()
-      this.setState({totalSupply})
+      this.setState({ totalSupply })
 
       // set up an array to keep track of tokens
-      for(let i = 1; i <= totalSupply; i++){
-        const KryptoBird = await contract.methods.KryptoBirdz(i-1).call();
+      for (let i = 1; i <= totalSupply; i++) {
+        const KryptoBird = await contract.methods.KryptoBirdz(i - 1).call()
         this.setState({
-          kryptoBirdz: [...this.state.kryptoBirdz, KryptoBird]
+          kryptoBirdz: [...this.state.kryptoBirdz, KryptoBird],
         })
       }
-    }
-    else {
-      window.alert("Smart contract not deployed")
+    } else {
+      window.alert('Smart contract not deployed')
     }
   }
 
   // setting up mint function
   mint = (kryptoBird) => {
-    this.state.contract.methods.mint(kryptoBird).send({from: this.state.account})
-    .once('receipt', (receipt) => {
-      this.setState({
-        kryptoBirdz: [...this.state.kryptoBirdz, KryptoBird]
+    this.state.contract.methods
+      .mint(kryptoBird)
+      .send({ from: this.state.account })
+      .once('receipt', (receipt) => {
+        this.setState({
+          kryptoBirdz: [...this.state.kryptoBirdz, KryptoBird],
+        })
       })
-    })
   }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       account: '',
       contract: null,
       totalSupply: 0,
-      kryptoBirdz: []
+      kryptoBirdz: [],
     }
   }
 
   render() {
     return (
       <div>
-        {console.log(this.state.kryptoBirdz)}
-        <Navbar account = {this.state.account}/>
-        <Main mint = {this.mint} kryptoBirdz={this.state.kryptoBirdz}/>
+        <Router>
+          {console.log(this.state.kryptoBirdz)}
+          <Navbar account={this.state.account} />
+          <Routes>
+          <Route
+              exact
+              path="/"
+              element={
+                <Home/>
+              }
+            />
+            <Route
+              exact
+              path="/mint"
+              element={
+                <Main mint={this.mint} kryptoBirdz={this.state.kryptoBirdz} />
+              }
+            />
+          </Routes>
+        </Router>
       </div>
     )
   }
