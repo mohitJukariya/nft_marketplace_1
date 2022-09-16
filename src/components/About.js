@@ -35,8 +35,8 @@ function About() {
             <input type="text" name='Name' placeholder="Full Name"></input>
             <input type="E-mail" name='E-Mail' placeholder="E-mail"></input>
             <input type="number" name='Contact Number' placeholder="Contact Number"></input>
-            <input type="text" name='Message' placeholder="Message"></input>
-            <textarea typet="text" name='' placeholder="Type Here..."></textarea>
+            <input type="text" name='Subject' placeholder="Subject"></input>
+            <textarea typet="text" name='Message' placeholder="Type Here..."></textarea>
             <button type="submit"> Submit </button>
           </form>
         </div>
