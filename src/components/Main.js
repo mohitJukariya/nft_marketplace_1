@@ -32,10 +32,10 @@ export class Main extends Component {
           </form>
           <hr/>
           <div className="row textCenter">
-            {this.props.kryptoBirdz.map((kryptoBird, key) => {
+            {this.props.kryptoBirdz.map((kryptoBird) => {
               return(
                 <div className='col-md-4 my-3' >
-                  <div>
+                  <div key={kryptoBird.toString()}>
                     <MDBCard className='token img' style={{maxWidth:'22rem'}}>
                     <MDBCardImage src={kryptoBird} position='top' height='250rem' style={{marginRight:'4px'}}/>
                     <MDBCardBody>

@@ -30,7 +30,7 @@ function About() {
       <div className="contact">
         <div className="contact1"></div>
         <div className="contact2">
-          <form>
+          <form  action="https://formspree.io/f/mqkjpllk" method="POST" >
             <h2>Contact Us </h2>
             <input type="text" placeholder="Full Name"></input>
             <input type="E-mail" placeholder="E-mail"></input>
