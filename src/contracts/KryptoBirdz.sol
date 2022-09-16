@@ -21,4 +21,8 @@ contract KryptoBird is ERC721Connector {
 
         _kryptoBirdzExists[_kryptoBird] = true;
     }
+
+    // function transfer() public {
+    //     require(_kryptoBirdzExists[]);
+    // }
 }

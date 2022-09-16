@@ -29,6 +29,17 @@ contract ERC721Enumerable is ERC721, IERC721Enumerable{
         _addTokensToOwnerEnumeration(to, tokenId);
     }
 
+    // function _burn(address _of, uint tokenId) internal override(ERC721) {
+    //     super._burn(_of, tokenId);
+    //     _deleteTokensFromAllTokenEnumeration(tokenId);
+    //     _deleteTokensFromOwnerEnumeration(_of, tokenId);
+    // }
+
+    // function _deleteTokensFromAllTokenEnumeration(uint tokenId) private {
+    //     require(_exists[tokenId],"Token does not exists 2");
+    //     _
+    // }
+    
     function _addTokensToOwnerEnumeration(address to, uint tokenId) private{
         _ownedTokensIndex[tokenId] = _ownedTokens[to].length;
         _ownedTokens[to].push(tokenId);

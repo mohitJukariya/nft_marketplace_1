@@ -51,6 +51,15 @@ contract ERC721 is ERC165, IERC721 {
         emit Transfer(address(0), to, tokenId);
     }
 
+    // function _burn(address _of, uint256 _tokenId) internal  virtual{
+    //     require(_of == msg.sender, "Only owner can burn the token");
+    //     require(_exists(tokenId),"Token does not exists to burn");
+    //     _tokenOwner[_tokenId] = null;
+    //     _OwnedTokensCount[_of].decrement();
+    //     _tokenApprovals[_tokenId] = null;
+    // }
+
+
     function _transferFrom(address _from, address _to, uint256 _tokenId) internal {
         require(_to != address(0), 'Error - ERC721 Transfer to the zero address');
         require(ownerOf(_tokenId) == _from, "Trying to transfer a token the address does not own!");

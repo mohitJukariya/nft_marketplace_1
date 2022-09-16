@@ -29,6 +29,15 @@ export class Navbar extends Component {
                   <strong>Mint</strong>
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link active text-light"
+                  aria-current="page"
+                  to="/aboutus"
+                >
+                  <strong>About Us</strong>
+                </Link>
+              </li>
             </ul>
           </div>
           <small className="text-light mx-3 px-2"><strong>{this.props.account}</strong></small>

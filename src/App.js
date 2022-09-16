@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Main from './components/Main'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
+import About from './components/About'
 
 class App extends Component {
   async componentDidMount() {
@@ -86,19 +87,16 @@ class App extends Component {
           {console.log(this.state.kryptoBirdz)}
           <Navbar account={this.state.account} />
           <Routes>
-          <Route
-              exact
-              path="/"
-              element={
-                <Home/>
-              }
-            />
+            <Route exact path="/" element={<Home />} />
             <Route
               exact
               path="/mint"
               element={
                 <Main mint={this.mint} kryptoBirdz={this.state.kryptoBirdz} />
               }
+            />
+          <Route
+            exact path="/aboutus" element={<About />}
             />
           </Routes>
         </Router>
