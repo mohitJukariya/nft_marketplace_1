@@ -10,7 +10,7 @@ export class Navbar extends Component {
             <p className="navbar-brand text-light" style={{margin: '5px'}} href="/">
               <strong>NFT Marketplace</strong>
             </p>
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav me-auto mb-2 mx-3 mb-lg-0">
               <li className="nav-item">
                 <Link
                   className="nav-link active text-light"
